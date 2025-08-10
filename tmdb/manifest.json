@@ -1,0 +1,18 @@
+{
+    "version": "1.0.0",
+    "id": "1",
+    "name": "TMDb",
+    "description": "Plugin for fetching TMDb metadata",
+    "status": 1,
+    "mediaTypes": [
+        "Movies",
+        "Tv Shows",
+        "Anime"
+    ],
+    "sources": [
+        "Metadata"
+    ],
+    "lanaguage": "Multi",
+    "scriptLanguage": "js",
+    "size": 0
+}
