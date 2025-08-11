@@ -1,0 +1,6 @@
+{
+    "name": "Quickstream repository",
+    "description": "Quickstream providers repository",
+    "pluginsUrl": "https://raw.githubusercontent.com/quickstream0/js-plugins/builds/plugins.json",
+    "iconUrl": "https://quickstream.vercel.app/static/images/logos/logo_96.png"
+}

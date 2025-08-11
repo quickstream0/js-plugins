@@ -1,6 +1,6 @@
 {
     "version": "1.0.0",
-    "id": "1",
+    "id": "a7b3c2d1e9f8g4h6i5j0k",
     "name": "TMDb",
     "description": "Plugin for fetching TMDb metadata",
     "status": 1,
@@ -9,10 +9,17 @@
         "Tv Shows",
         "Anime"
     ],
-    "sources": [
-        "Metadata"
+    "sources": {
+        "meta": true,
+        "link": false,
+        "ids": [
+            "tmdb",
+            "imdb"
+        ]
+    },
+    "lanaguages": [
+        "Multiple"
     ],
-    "lanaguage": "Multi",
-    "scriptLanguage": "js",
-    "size": 0
+    "sl": "js",
+    "requireResources": false
 }
