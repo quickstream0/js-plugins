@@ -17,9 +17,9 @@
             "imdb"
         ]
     },
-    "lanaguages": [
+    "languages": [
         "Multiple"
     ],
     "sl": "js",
-    "requireResources": false
+    "requireConfiguration": false
 }

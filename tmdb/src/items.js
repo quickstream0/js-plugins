@@ -1,5 +1,5 @@
 // This module handles searchin item.
-import { BASE_URL, options } from './constants.js';
+import { BASE_URL } from './constants.js';
 
 /**
  * Search an item.
@@ -8,7 +8,7 @@ import { BASE_URL, options } from './constants.js';
  */
 
 export async function getItems(id) {
-  const url = `${BASE_URL}${id}`;
-  const response = await fetch(url, options);
+  const url = `${BASE_URL}${id}?api_key=${apiKey}`;
+  const response = await fetch(url);
   return await response.json();
 }

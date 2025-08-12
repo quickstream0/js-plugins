@@ -10,16 +10,10 @@ import { apiKey, BASE_URL, appendToResponse } from './constants.js';
  */
 
 export async function getItemDetails(type, id) {
-  const options = {
-    headers: {
-      "api_key": apiKey,
-      "append_to_response": appendToResponse,
-    }
-  };
   try {
     const endpoint = details(type, id);
     const url = `${BASE_URL}${endpoint}`;
-    const response = await fetch(url, options);
+    const response = await fetch(url);
     return await response.json();
 
   } catch (error) {
@@ -30,12 +24,9 @@ export async function getItemDetails(type, id) {
 
 export async function getItemSeasonDetails(id, sn) {
   try {
-    const options = {
-      headers: { "api_key": apiKey }
-    };
     const endpoint = tvSeasonDetails(id, sn);
     const url = `${BASE_URL}${endpoint}`;
-    const response = await fetch(url, options);
+    const response = await fetch(url);
     return await response.json();
   } catch (error) {
     console.error('Error fetching item details:', error.message);

@@ -28,10 +28,11 @@ async function run(params) {
     switch (mode) {
       case 'search': {
         const { query } = params;
-        if (!query || typeof query !== 'string') {
+        const { type } = params;
+        if (!query || typeof query !== "string") {
           return JSON.stringify({ success: false, error: 'Missing or invalid "query" parameter for search mode.' });
         }
-        result = await searchItem(query);
+        result = await searchItem(query, type);
         break;
       }
 

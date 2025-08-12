@@ -1,26 +1,3 @@
-// src/endpoints.js
-function search(type) {
-  return `/search/${type}`;
-}
-function details(type, id) {
-  return `${type}/${id}`;
-}
-function trending(type, timeWindow) {
-  return `/trending/${type}/${timeWindow}`;
-}
-function discover(type) {
-  return `/discover/${type}`;
-}
-function popular(type) {
-  return `/${type}/popular`;
-}
-function topRated(type) {
-  return `/${type}/top_rated`;
-}
-function tvSeasonDetails(tvId, seasonNumber) {
-  return `/${details("tv", tvId)}/season/${seasonNumber}`;
-}
-
 // src/utils.js
 function getRandomItem(list) {
   const randomIndex = Math.floor(Math.random() * list.length);
@@ -120,24 +97,41 @@ var tvGenre = getRandomItem(tvGenres);
 var movieGenre = getRandomItem(movieGenres);
 var tvYear = getRandomItem(releaseYears);
 var movieYear = getRandomItem(releaseYears);
-var apiKey = getRandomItem(apiKeys);
-var options = {
-  headers: { "api_key": apiKey }
-};
+var apiKey2 = getRandomItem(apiKeys);
 var appendToResponse = "credits,videos,reviews,similar,external_ids,recommendations";
+
+// src/endpoints.js
+function search(title, type) {
+  if (!type) {
+    return `/search/multi?query=${title}&api_key=${apiKey2}`;
+  }
+  return `/search/${type}?query=${title}&api_key=${apiKey2}`;
+}
+function details(type, id) {
+  return `${type}/${id}?api_key=${apiKey2}&append_to_response=${appendToResponse}`;
+}
+function trending(type, timeWindow) {
+  return `/trending/${type}/${timeWindow}?api_key=${apiKey2}`;
+}
+function discover(type) {
+  return `/discover/${type}?api_key=${apiKey2}`;
+}
+function popular(type) {
+  return `/${type}/popular?api_key=${apiKey2}`;
+}
+function topRated(type) {
+  return `/${type}/top_rated?api_key=${apiKey2}`;
+}
+function tvSeasonDetails(tvId, seasonNumber) {
+  return `/${details("tv", tvId)}/season/${seasonNumber}?api_key=${apiKey2}`;
+}
 
 // src/search.js
 async function searchItem(title, type) {
-  const options2 = {
-    headers: {
-      "query": title,
-      "api_key": apiKey
-    }
-  };
   try {
-    const endpoint = search(type);
+    const endpoint = search(title, type);
     const url = `${BASE_URL}${endpoint}`;
-    const response = await fetch(url, options2);
+    const response = await fetch(url);
     return await response.json();
   } catch (error) {
     console.error("Error searching for items:", error.message);
@@ -221,99 +215,79 @@ async function getHomeItems() {
   }
 }
 async function getFeaturedTv() {
-  const options2 = {
-    headers: {
-      "with_genres": tvGenre,
-      "first_air_date_year": tvYear,
-      "api_key": apiKey
-    }
-  };
   const endpoint = `${discover("tv")}`;
-  const url = `${BASE_URL}${endpoint}`;
-  const response = await fetch(url, options2);
+  const url = `${BASE_URL}${endpoint}&with_genres=${tvGenre}&first_air_date_year=${tvYear}`;
+  const response = await fetch(url);
   return await response.json();
 }
 async function getFeaturedMovies() {
-  const options2 = {
-    headers: {
-      "with_genres": movieGenre,
-      "primary_release_year": movieYear,
-      "api_key": apiKey
-    }
-  };
   const endpoint = `${discover("movie")}`;
-  const url = `${BASE_URL}${endpoint}`;
-  const response = await fetch(url, options2);
+  const url = `${BASE_URL}${endpoint}&with_genres=${movieGenre}&first_air_date_year=${movieYear}`;
+  const response = await fetch(url);
   return await response.json();
 }
 async function getAiringTv() {
   const endpoint = "/tv/airing_today";
   const url = `${BASE_URL}${endpoint}`;
-  const response = await fetch(url, options);
+  const response = await fetch(url);
   return await response.json();
 }
 async function getNowPlayingMovies() {
   const endpoint = "/movie/now_playing";
   const url = `${BASE_URL}${endpoint}`;
-  const response = await fetch(url, options);
+  const response = await fetch(url);
   return await response.json();
 }
 async function getPopularTvs() {
   const endpoint = popular("tv");
   const url = `${BASE_URL}${endpoint}`;
-  const response = await fetch(url, options);
+  const response = await fetch(url);
   return await response.json();
 }
 async function getPopularMovies() {
   const endpoint = popular("movie");
   const url = `${BASE_URL}${endpoint}`;
-  const response = await fetch(url, options);
+  const response = await fetch(url);
   return await response.json();
 }
 async function getTrendingTvs() {
   const endpoint = trending("tv", "week");
   const url = `${BASE_URL}${endpoint}`;
-  const response = await fetch(url, options);
+  const response = await fetch(url);
   return await response.json();
 }
 async function getTrendingMovies() {
   const endpoint = trending("movie", "week");
   const url = `${BASE_URL}${endpoint}`;
-  const response = await fetch(url, options);
+  const response = await fetch(url);
   return await response.json();
 }
 async function getTopRatedTvs() {
   const endpoint = topRated("tv");
   const url = `${BASE_URL}${endpoint}`;
-  const response = await fetch(url, options);
+  const response = await fetch(url);
   return await response.json();
 }
 async function getTopRatedMovies() {
   const endpoint = topRated("movie");
   const url = `${BASE_URL}${endpoint}`;
-  const response = await fetch(url, options);
+  const response = await fetch(url);
   return await response.json();
 }
 
 // src/items.js
 async function getItems(id) {
-  const url = `${BASE_URL}${id}`;
-  const response = await fetch(url, options);
+  const url = `${BASE_URL}${id}?api_key=${apiKey}`;
+  const response = await fetch(url);
   return await response.json();
 }
 
 // src/detail.js
 async function getItemDetails(type, id) {
-  const options2 = {
-    headers: {
-      "api_key": apiKey,
-      "append_to_response": appendToResponse
-    }
-  };
   try {
     const endpoint = details(type, id);
     const url = `${BASE_URL}${endpoint}`;
-    const response = await fetch(url, options2);
+    const response = await fetch(url);
     return await response.json();
   } catch (error) {
     console.error("Error fetching item details:", error.message);
@@ -322,12 +296,9 @@ async function getItemDetails(type, id) {
 }
 async function getItemSeasonDetails(id, sn) {
   try {
-    const options2 = {
-      headers: { "api_key": apiKey }
-    };
     const endpoint = tvSeasonDetails(id, sn);
     const url = `${BASE_URL}${endpoint}`;
-    const response = await fetch(url, options2);
+    const response = await fetch(url);
     return await response.json();
   } catch (error) {
     console.error("Error fetching item details:", error.message);
@@ -349,10 +320,11 @@ async function run(params) {
     switch (mode) {
       case "search": {
         const { query } = params;
+        const { type } = params;
         if (!query || typeof query !== "string") {
           return JSON.stringify({ success: false, error: 'Missing or invalid "query" parameter for search mode.' });
         }
-        result = await searchItem(query);
+        result = await searchItem(query, type);
         break;
       }
       case "home": {

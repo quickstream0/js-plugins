@@ -1,5 +1,5 @@
 // This module handles fetching and parsing the home page.
-import { options, BASE_URL, apiKey, tvGenre, movieGenre, tvYear, movieYear } from './constants.js';
+import { BASE_URL, tvGenre, movieGenre, tvYear, movieYear } from './constants.js';
 import { trending, discover, popular, topRated } from './endpoints.js';
 
 /**
@@ -87,90 +87,76 @@ export async function getHomeItems() {
 // async function getTrending() {
 //     const endpoint = trending('all', 'week');
 //     const url = `${BASE_URL}${endpoint}`;
-//     const response = await fetch(url, options);
+//     const response = await fetch(url);
 //     return await response.json();
 // }
 
 async function getFeaturedTv() {
-  const options = {
-    headers: {
-      "with_genres": tvGenre,
-      "first_air_date_year": tvYear,
-      "api_key": apiKey
-    }
-  };
   const endpoint = `${discover('tv')}`;
-  const url = `${BASE_URL}${endpoint}`;
-  const response = await fetch(url, options);
+  const url = `${BASE_URL}${endpoint}&with_genres=${tvGenre}&first_air_date_year=${tvYear}`;
+  const response = await fetch(url);
   return await response.json();
 }
 
 async function getFeaturedMovies() {
-  const options = {
-    headers: {
-      "with_genres": movieGenre,
-      "primary_release_year": movieYear,
-      "api_key": apiKey
-    }
-  };
   const endpoint = `${discover('movie')}`;
-  const url = `${BASE_URL}${endpoint}`;
-  const response = await fetch(url, options);
+  const url = `${BASE_URL}${endpoint}&with_genres=${movieGenre}&first_air_date_year=${movieYear}`;
+  const response = await fetch(url);
   return await response.json();
 }
 
 async function getAiringTv() {
   const endpoint = "/tv/airing_today";
   const url = `${BASE_URL}${endpoint}`;
-  const response = await fetch(url, options);
+  const response = await fetch(url);
   return await response.json();
 }
 
 async function getNowPlayingMovies() {
   const endpoint = "/movie/now_playing";
   const url = `${BASE_URL}${endpoint}`;
-  const response = await fetch(url, options);
+  const response = await fetch(url);
   return await response.json();
 }
 
 async function getPopularTvs() {
   const endpoint = popular('tv');
   const url = `${BASE_URL}${endpoint}`;
-  const response = await fetch(url, options);
+  const response = await fetch(url);
   return await response.json();
 }
 
 async function getPopularMovies() {
   const endpoint = popular('movie');
   const url = `${BASE_URL}${endpoint}`;
-  const response = await fetch(url, options);
+  const response = await fetch(url);
   return await response.json();
 }
 
 async function getTrendingTvs() {
   const endpoint = trending('tv', 'week');
   const url = `${BASE_URL}${endpoint}`;
-  const response = await fetch(url, options);
+  const response = await fetch(url);
   return await response.json();
 }
 
 async function getTrendingMovies() {
   const endpoint = trending('movie', 'week');
   const url = `${BASE_URL}${endpoint}`;
-  const response = await fetch(url, options);
+  const response = await fetch(url);
   return await response.json();
 }
 
 async function getTopRatedTvs() {
   const endpoint = topRated('tv');
   const url = `${BASE_URL}${endpoint}`;
-  const response = await fetch(url, options);
+  const response = await fetch(url);
   return await response.json();
 }
 
 async function getTopRatedMovies() {
   const endpoint = topRated('movie');
   const url = `${BASE_URL}${endpoint}`;
-  const response = await fetch(url, options);
+  const response = await fetch(url);
   return await response.json();
 }

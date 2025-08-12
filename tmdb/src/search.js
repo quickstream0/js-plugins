@@ -10,16 +10,10 @@ import { apiKey, BASE_URL } from './constants.js';
  */
 
 export async function searchItem(title, type) {
-  const options = {
-    headers: {
-      "query": title,
-      "api_key": apiKey,
-    }
-  };
   try {
-    const endpoint = search(type);
+    const endpoint = search(title, type);
     const url = `${BASE_URL}${endpoint}`;
-    const response = await fetch(url, options);
+    const response = await fetch(url);
     return await response.json();
   } catch (error) {
     console.error('Error searching for items:', error.message);

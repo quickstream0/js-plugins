@@ -113,9 +113,5 @@ export const movieYear = getRandomItem(releaseYears);
 
 export const apiKey = getRandomItem(apiKeys);
 
-export const options = {
-    headers: { "api_key": apiKey }
-};
-
 export const appendToResponse =
     "credits,videos,reviews,similar,external_ids,recommendations";
