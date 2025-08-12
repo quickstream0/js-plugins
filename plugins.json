@@ -5,7 +5,7 @@
         "description": "Plugin for fetching TMDb metadata",
         "status": 1,
         "url": "https://raw.githubusercontent.com/quickstream0/js-plugins/builds/tmdb.qsp",
-        "iconUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Tmdb.new.logo.svg/1280px-Tmdb.new.logo.svg.png",
-        "fileSize": 2116
+        "iconUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Tmdb-312x276-logo.png",
+        "fileSize": 8192
     }
 ]
