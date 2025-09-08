@@ -20,6 +20,8 @@
     "languages": [
         "Multiple"
     ],
-    "sl": "js",
-    "requireConfiguration": false
+    "requires": {
+        "configuration": false,
+        "resources": false
+    }
 }
