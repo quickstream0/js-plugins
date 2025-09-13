@@ -2,6 +2,7 @@
     {
         "version": "1.0.0",
         "name": "TMDb",
+        "internalName": "TMDbProvider",
         "description": "Plugin for fetching TMDb metadata",
         "status": 1,
         "url": "https://raw.githubusercontent.com/quickstream0/plugins/builds/tmdb.qsp",
